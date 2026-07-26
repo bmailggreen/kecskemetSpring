@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class CarController {
     @Autowired
@@ -29,13 +31,17 @@ public class CarController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
+        List<String> sizes = List.of("small", "medium", "big",
+                "extra large");
+
         model.addAttribute(
                 "title", "Autó Menedzser");
         //System.out.println(carService.cars);
         model.addAttribute(
                 "cars", carService.cars);
         model.addAttribute(
-                "car", new Car("Toyota", 230, "Silver"));
+                "car", new Car("Toyota", 230, "Silver", true));
+        model.addAttribute("sizes", sizes);
         return "cars";
     }
 

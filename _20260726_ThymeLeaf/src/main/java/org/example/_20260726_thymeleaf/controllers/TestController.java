@@ -23,9 +23,9 @@ public class TestController {
     @ResponseBody
     public List<Car> getJsonData() {
         List<Car> cars = List.of(
-                new Car("Chevrolet", 230, "blue"),
-                new Car("BMW", 50, "white"),
-                new Car("Trabant", 130, "black")
+                new Car("Chevrolet", 230, "blue", true),
+                new Car("BMW", 50, "white", true),
+                new Car("Trabant", 130, "black", false)
         );
         return cars;
     }

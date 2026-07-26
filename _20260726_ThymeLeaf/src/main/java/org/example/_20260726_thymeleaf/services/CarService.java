@@ -14,11 +14,11 @@ public class CarService {
 
     private void fillCarTestData() {
         cars.add(
-                new Car("Volkswagen", 200, "red"));
+                new Car("Volkswagen", 200, "red", true));
         cars.add(
-                new Car("Tesla", 130, "white"));
+                new Car("Tesla", 130, "white", false));
         cars.add(
-                new Car("BMW", 210, "yellow"));
+                new Car("BMW", 210, "yellow", true));
     }
 
     public CarService() {
