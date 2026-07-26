@@ -16,6 +16,8 @@ public class CarController {
         model.addAttribute(
                 "title", "Autó Menedzser");
         //System.out.println(carService.cars);
+        model.addAttribute(
+                "cars", carService.cars);
         return "cars";
     }
 

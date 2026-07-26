@@ -3,8 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Cars Manager</title>
+<!--    <link rel="stylesheet" href="cars.css" />  -->
+    <link rel="stylesheet" type="text/css" href="cars.css"/>
+<!--
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+    </style>
+-->
 </head>
 <body>
     <h1 th:text="${title}"></h1>
+<!--    <p th:text="${cars}"></p>  -->
+
+<!--
+    <ul th:each="car : ${cars}">
+        <li th:text="${car}"></li>
+    </ul>
+-->
+
+<!--
+    <ul th:each="car : ${cars}">
+        <li>
+            <span th:text="${car.type}  "></span>
+            <span th:text="${car.speed}  "></span>
+            <span th:text="${car.color}  "></span>
+        </li>
+    </ul>
+-->
+
+
+<!--
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Speed</th>
+            <th>Color</th>
+        </tr>
+        <tr>
+            <td>Toyota</td>
+            <td>120</td>
+            <td>Silver</td>
+        </tr>
+    </table>
+-->
+
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Speed</th>
+            <th>Color</th>
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.type}"></td>
+            <td th:text="${car.speed}"></td>
+            <td th:text="${car.color}"></td>
+        </tr>
+    </table>
+
+
+<!--
+Az OGNL (Object-Graph Navigation Language) egy nyílt forráskódú,
+Java-alapú kifejezésnyelv (Expression Language).
+A legfőbb feladata, hogy egyszerű, rövid szöveges kifejezésekkel
+lehessen adatokat lekérni és módosítani bonyolult
+Java objektum-struktúrákból (objektum-gráfokból),
+anélkül, hogy hosszú Java kódokat kellene írni.
+
+A Thymeleaf keretrendszerben az OGNL-szerű szintaxist
+a Standard Expression Language biztosítja (pld. th:text, th:each)
+-->
+
 </body>
 </html>
