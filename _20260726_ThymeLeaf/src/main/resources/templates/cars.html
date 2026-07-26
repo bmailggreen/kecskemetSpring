@@ -5,6 +5,41 @@
     <title>Cars Manager</title>
 <!--    <link rel="stylesheet" href="cars.css" />  -->
     <link rel="stylesheet" type="text/css" href="cars.css"/>
+
+<!--
+    <h2>Autó felvétele:</h2>
+    <form th:action="@{/addCar}" th:method="post">
+        <label>Típus:
+            <input type="text" name="type">
+        </label>
+        <label>Sebesség:
+            <input type="number" name="speed">
+        </label>
+        <label>Szín:
+            <input type="text" name="color">
+        </label>
+        <button type="submit">Hozzáad</button>
+    </form>
+-->
+
+    <h2>Autó felvétele:</h2>
+    <form th:action="@{/addCar}" th:method="post" th:object="${car}">
+        <label>Típus:
+<!--            <input type="text" th:field="${car.type}">  -->
+            <input type="text" th:field="*{type}">
+        </label>
+        <label>Sebesség:
+<!--            <input type="number" th:field="${car.speed}">  -->
+            <input type="number" th:field="*{speed}">
+        </label>
+        <label>Szín:
+<!--            <input type="text" th:field="${car.color}">  -->
+            <input type="text" th:field="*{color}">
+        </label>
+        <button type="submit">Hozzáad</button>
+    </form>
+
+
 <!--
     <style>
         table, th, td {
@@ -50,7 +85,9 @@
     </table>
 -->
 
-    <table>
+
+    <h2 th:if="${cars.size() == 0}"> No cars found! </h2>
+    <table th:unless="${cars.size() == 0}">
         <tr>
             <th>Type</th>
             <th>Speed</th>
@@ -62,7 +99,6 @@
             <td th:text="${car.color}"></td>
         </tr>
     </table>
-
 
 <!--
 Az OGNL (Object-Graph Navigation Language) egy nyílt forráskódú,

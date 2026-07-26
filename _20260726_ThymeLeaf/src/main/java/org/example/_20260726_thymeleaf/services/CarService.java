@@ -22,6 +22,6 @@ public class CarService {
     }
 
     public CarService() {
-        fillCarTestData();
+//        fillCarTestData();
     }
 }
