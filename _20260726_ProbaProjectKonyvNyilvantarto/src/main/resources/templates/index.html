@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Főmenü</title>
+</head>
+<body>
+    <h1>Főmenü</h1>
+    <form th:action="@{/redirectNewBook}" th:method="post">
+        <button type="submit">Új Könyv Felvétele</button>
+    </form><br>
+    <form th:action="@{/redirectShowBooks}" th:method="post">
+        <button type="submit">Meglévő Könyvek Listázása</button>
+    </form><br>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Könyv Felvétele</title>
+</head>
+<body>
+    <h1>Könyv Felvétele</h1>
+    <form th:action="@{/modifyBook}" th:method="post" th:object="${book}">
+        <input type="hidden" th:field="*{id}">
+        <label>Szerző:
+            <input type="text" th:field="*{author}">
+        </label>
+        <label>Cím:
+            <input type="text" th:field="*{title}">
+        </label>
+        <label>Kiadás Éve:
+            <input type="number" th:field="*{releaseYear}">
+        </label>
+        <button type="submit">Könyv Módosítása</button>
+    </form>
+
+    <form th:action="@{/redirectMainMenu}" th:method="post">
+        <button type="submit">Visszalépés a Főmenübe</button>
+    </form><br>
+
+</body>
+</html>
