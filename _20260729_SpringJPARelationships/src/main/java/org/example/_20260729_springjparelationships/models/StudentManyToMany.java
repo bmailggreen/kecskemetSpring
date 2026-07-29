@@ -1,5 +1,6 @@
 package org.example._20260729_springjparelationships.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -14,6 +15,7 @@ public class StudentManyToMany {
     Double gradeAverage;
 
     @ManyToMany(mappedBy = "students")
+    @JsonIgnore
     Set<TeacherManyToMany> teachers;
 
     public StudentManyToMany() {
