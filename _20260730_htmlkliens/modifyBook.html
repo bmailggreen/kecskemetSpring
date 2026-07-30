@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Könyv Felvétele</title>
+</head>
+<body>
+    <h1>Könyv Felvétele</h1>
+    <form id="modifyBookForm" action="http:/localhost:8080/modifyBook" method="put">
+        <input type="hidden" id="bookId">
+        <label>Szerző:
+            <input type="text" id="bookAuthor">
+        </label>
+        <label>Cím:
+            <input type="text" id="bookTitle">
+        </label>
+        <label>Kiadás Éve:
+            <input type="number" id="bookReleaseYear">
+        </label>
+        <button type="submit">Könyv Módosítása</button>
+    </form>
+
+    <form action="index.html">
+        <button type="submit">Visszalépés a Főmenübe</button>
+    </form><br>
+
+	<script>
+			window.addEventListener("DOMContentLoaded", () => {
+			// 1. Kiszedjük az adatokat a memóriából
+			const id = sessionStorage.getItem("bookId");
+			const author = sessionStorage.getItem("bookAuthor");
+			const title = sessionStorage.getItem("bookTitle");
+			const releaseYear = sessionStorage.getItem("bookReleaseYear");
+
+			// 2. Behelyezzük őket az új oldal input mezőibe
+			if (id) document.getElementById("bookId").value = id;
+			if (author) document.getElementById("bookAuthor").value = author;
+			if (title) document.getElementById("bookTitle").value = title;
+			if (releaseYear) document.getElementById("bookReleaseYear").value = releaseYear;
+			
+			// 3. Opcionális: törölhetjük a memóriát, hogy ne maradjon ott feleslegesen
+			sessionStorage.clear();
+		});
+
+		document.getElementById('modifyBookForm').addEventListener('submit', function(e) {
+			e.preventDefault(); // Megállítja a böngészőt, hogy NE küldje el GET-ként a formot
+
+			// 1. Összegyűjtjük az értékeket az input mezőkből
+			const id = document.getElementById("bookId").value;
+			const author = encodeURIComponent(document.getElementById("bookAuthor").value);
+			const title = encodeURIComponent(document.getElementById("bookTitle").value);
+			const releaseYear = document.getElementById("bookReleaseYear").value;
+
+			// 2. Összerakjuk az URL-t a paraméterekkel
+			const url = `http://localhost:8080/modifyBook?id=${id}&author=${author}&title=${title}&releaseYear=${releaseYear}`;
+
+			// 3. Elküldjük a PUT kérést (üres body-val, mert minden az URL-ben van)
+			fetch(url, {
+				method: 'PUT'
+			})
+			.then(response => {
+				if (response.ok) {
+					alert('A könyv sikeresen módosítva!');
+					window.location.href = 'index.html';
+				} else {
+					alert('Szerverhiba történt a mentés során.');
+				}
+			})
+			.catch(error => {
+				console.error('Hiba a hálózati kérésben:', error);
+			});
+		});
+
+		
+/*		
+		document.getElementById('modifyBookForm').addEventListener('submit', function(e) {
+			e.preventDefault(); // Megállítja a böngészőt, hogy NE küldje el GET-ként a formot
+
+			// 1. Összegyűjtjük az adatokat az input mezőkből egy objektumba
+			const bookData = {
+				id: document.getElementById("bookId").value,
+				author: document.getElementById("bookAuthor").value,
+				title: document.getElementById("bookTitle").value,
+				releaseYear: document.getElementById("bookReleaseYear").value
+			};
+
+			// 2. Elküldjük a valódi PUT REST kérést a backendnek
+			fetch('http://localhost:8080/modifyBook', {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json' // Jelezzük a szervernek, hogy JSON jön
+				},
+				body: JSON.stringify(bookData) // Szöveggé alakítjuk az objektumot
+			})
+			.then(response => {
+				if (response.ok) {
+					alert('A könyv sikeresen módosítva!');
+					window.location.href = 'index.html'; // Visszairányítás a főoldalra a sikeres mentés után
+				} else {
+					alert('Szerverhiba történt a mentés során.');
+				}
+			})
+			.catch(error => {
+				console.error('Hiba a hálózati kérésben:', error);
+				alert('Nem sikerült elérni a szervert.');
+			});
+		});
+*/		
+		
+	</script>
+</body>
+</html>

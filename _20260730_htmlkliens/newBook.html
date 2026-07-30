@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Könyv Felvétele</title>
+</head>
+<body>
+    <h1>Könyv Felvétele</h1>
+    <form id="addBookForm" action="http://localhost:8080/addBook" method="post">
+        <label>Szerző:
+            <input type="text" name="author" id="author">
+        </label>
+        <label>Cím:
+            <input type="text" name="title" id="title">
+        </label>
+        <label>Kiadás Éve:
+            <input type="number" name="releaseYear" id="releaseYear">
+        </label>
+        <button type="submit">Könyv Felvétele</button>
+    </form>
+
+    <form action="index.html">
+        <button type="submit">Visszalépés a Főmenübe</button>
+    </form><br>
+
+	<script>
+		document.getElementById('addBookForm').addEventListener('submit', function(e) {
+			e.preventDefault(); // Megállítja a böngészőt, hogy NE küldje el POST-ként a formot
+
+			// 1. Összegyűjtjük az értékeket az input mezőkből
+			const author = encodeURIComponent(document.getElementById("author").value);
+			const title = encodeURIComponent(document.getElementById("title").value);
+			const releaseYear = document.getElementById("releaseYear").value;
+
+			// 2. Összerakjuk az URL-t a paraméterekkel
+			const url = `http://localhost:8080/addBook?author=${author}&title=${title}&releaseYear=${releaseYear}`;
+
+			// 3. Elküldjük a POST kérést (üres body-val, mert minden az URL-ben van)
+			fetch(url, {
+				method: 'POST'
+			})
+			.then(response => {
+				if (response.ok) {
+					alert('A könyv elmentve!');
+					window.location.href = 'index.html';
+				} else {
+					alert('Szerverhiba történt a mentés során.');
+				}
+			})
+			.catch(error => {
+				console.error('Hiba a hálózati kérésben:', error);
+			});
+		});
+	
+	</script>
+
+</body>
+</html>
